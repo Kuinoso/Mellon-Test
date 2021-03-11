@@ -3,6 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logging from './config/logging';
 import config from './config/config';
+import routes from './routes/user';
 
 const NAMESPACE = 'Server';
 const router = express();
@@ -31,6 +32,8 @@ router.use((req, res, next) => {
 
     next();
 });
+
+router.use('/api/user', routes);
 
 router.use((req, res, next) => {
     const error = new Error('Not found');
