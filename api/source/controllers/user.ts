@@ -7,6 +7,7 @@ import weight from '../helpers/weight';
 import nullPromises from '../helpers/nullPromises';
 import today from '../helpers/today';
 import requestTime from '../helpers/requestTime';
+import cases from '../helpers/cases';
 import Order from '../interfaces/Order';
 
 dotenv.config();
@@ -27,6 +28,7 @@ const newOrder = async (req: Request, res: Response, next: NextFunction) => {
             const rules = shippingMethodResponse.data.rules;
             const { min, max } = rules.availability.byWeight;
             const { dayType, fromTimeOfDay, toTimeOfDay } = rules.availability.byRequestTime;
+            const casesList = rules.promisesParameters.cases;
 
             order.creation_date = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(Date.now());
             order.internal_order_number = Date.now() + Math.floor(Math.random() * (100 - 0 + 1)) + 0;
@@ -59,7 +61,18 @@ const newOrder = async (req: Request, res: Response, next: NextFunction) => {
                 return;
             }
 
-            console.log(rules);
+            const selectedCase = cases.validate(casesList, todayBusinessDay);
+
+            if (!selectedCase) {
+                order = nullPromises.get(order);
+                myCache.set(order.internal_order_number, order);
+
+                console.log('Rules not met');
+
+                return;
+            }
+
+            console.log('Pass');
         }
     } catch (err) {
         console.log(err);
