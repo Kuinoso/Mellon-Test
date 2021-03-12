@@ -8,7 +8,7 @@ import nullPromises from '../helpers/nullPromises';
 import today from '../helpers/today';
 import requestTime from '../helpers/requestTime';
 import cases from '../helpers/cases';
-import Order from '../interfaces/Order';
+import promise from '../helpers/promise';
 
 dotenv.config();
 
@@ -16,7 +16,7 @@ const myCache = new NodeCache();
 
 const newOrder = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        let order: Order = req.body;
+        let order = req.body;
 
         const shippingMethodResponse = await axios.get(`https://yhua9e1l30.execute-api.us-east-1.amazonaws.com/sandbox/shipping-methods/${order.shipping_method}`, {
             headers: {
@@ -31,7 +31,7 @@ const newOrder = async (req: Request, res: Response, next: NextFunction) => {
             const casesList = rules.promisesParameters.cases;
 
             order.creation_date = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(Date.now());
-            order.internal_order_number = Date.now() + Math.floor(Math.random() * (100 - 0 + 1)) + 0;
+            order.internal_order_number = `MSE-${Date.now()}-${Math.floor(Math.random() * (100 - 0 + 1)) + 0}`;
 
             const offDaysResponse = await axios.get('https://yhua9e1l30.execute-api.us-east-1.amazonaws.com/sandbox/off-days', {
                 headers: {
@@ -47,7 +47,7 @@ const newOrder = async (req: Request, res: Response, next: NextFunction) => {
                 order = nullPromises.get(order);
                 myCache.set(order.internal_order_number, order);
 
-                console.log('Rules not met');
+                res.status(200).send('Rules not met, order saved');
 
                 return;
             }
@@ -56,23 +56,28 @@ const newOrder = async (req: Request, res: Response, next: NextFunction) => {
                 order = nullPromises.get(order);
                 myCache.set(order.internal_order_number, order);
 
-                console.log('Rules not met');
+                res.status(200).send('Rules not met, order saved');
 
                 return;
             }
 
-            const selectedCase = cases.validate(casesList, todayBusinessDay);
+            const workingCase = cases.validate(casesList, todayBusinessDay);
 
-            if (!selectedCase) {
+            if (!workingCase) {
                 order = nullPromises.get(order);
                 myCache.set(order.internal_order_number, order);
 
-                console.log('Rules not met');
+                res.status(200).send('Rules not met, order saved');
 
                 return;
             }
 
-            console.log('Pass');
+            order = await promise.validate(order, workingCase, businessDays);
+            myCache.set(order.internal_order_number, order);
+
+            res.status(200).send('Order saved');
+
+            return;
         }
     } catch (err) {
         console.log(err);
@@ -80,7 +85,7 @@ const newOrder = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const getOrder = async (req: Request, res: Response, next: NextFunction) => {
-    const id: number = Number(req.params.id);
+    const id: string = req.params.id;
 
     const order = await myCache.get(id);
 

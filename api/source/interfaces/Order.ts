@@ -12,14 +12,14 @@ interface Order {
     shipping_region: string;
     shipping_country: string;
     line_items: Product[];
-    pack_promise_min: string | null;
-    pack_promise_max: string | null;
-    ship_promise_min: string | null;
-    ship_promise_max: string | null;
-    delivery_promise_min: string | null;
-    delivery_promise_max: string | null;
-    ready_pickup_promise_min: string | null;
-    ready_pickup_promise_max: string | null;
+    pack_promise_min: number | string | null;
+    pack_promise_max: number | string | null;
+    ship_promise_min: number | string | null;
+    ship_promise_max: number | string | null;
+    delivery_promise_min: number | string | null;
+    delivery_promise_max: number | string | null;
+    ready_pickup_promise_min: number | string | null;
+    ready_pickup_promise_max: number | string | null;
     creation_date: string;
     internal_order_number: number;
 }
