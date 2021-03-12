@@ -3,6 +3,14 @@ import Order from '../interfaces/Order';
 const setPromise = (businessDays: string[], type: string, order: any, orderPromise: string, deltaH: number, deltaD: number, deltaTime: number): Order => {
     const now = new Date();
     const hour: number = now.getHours();
+    const gmt = new Date().getTimezoneOffset() / -60;
+    if (gmt < 0) {
+        deltaH = deltaH + Number(gmt.toString().split('-')[1]);
+        deltaTime = deltaTime + Number(gmt.toString().split('-')[1]);
+    } else if (gmt > 0) {
+        deltaH = deltaH - Number(gmt.toString().split('+')[1]);
+        deltaTime = deltaTime - Number(gmt.toString().split('+')[1]);
+    };
 
     if (type === 'DELTA-HOURS') {
         const deltaHours: number = deltaH;

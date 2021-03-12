@@ -89,7 +89,17 @@ const getOrder = async (req: Request, res: Response, next: NextFunction) => {
 
     const order = await myCache.get(id);
 
-    console.log(order);
+    res.send(order);
 };
 
-export default { newOrder, getOrder };
+const getAllOrders = async (req: Request, res: Response, next: NextFunction) => {
+    const cacheOrders = Object.values(myCache.data);
+    const allOrders: any[] = [];
+
+    cacheOrders.forEach(order => {
+        allOrders.push(order.v);
+    });
+    res.send(allOrders);
+};
+
+export default { newOrder, getOrder, getAllOrders };
