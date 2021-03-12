@@ -2,44 +2,20 @@ import { NextFunction, Request, Response } from 'express';
 import axios from 'axios';
 import NodeCache from 'node-cache';
 import dotenv from 'dotenv';
+import nextBusinessDays from '../helpers/nextBussinesDays';
+import weight from '../helpers/weight';
+import nullPromises from '../helpers/nullPromises';
+import Order from '../interfaces/Order';
 
 dotenv.config();
 
 const myCache = new NodeCache();
 
-interface Product {
-    name: string;
-    qty: number;
-    weigth: number;
-}
-
-interface Order {
-    seller_store: string;
-    shipping_method: number;
-    external_order_number: number;
-    buyer_full_name: string;
-    buyer_phone_number: string;
-    buyer_email: string;
-    shipping_adress: string;
-    shipping_city: string;
-    shipping_region: string;
-    shipping_country: string;
-    line_items: Product[];
-    pack_promise_min: string | null;
-    pack_promise_max: string | null;
-    ship_promise_min: string | null;
-    ship_promise_max: string | null;
-    delivery_promise_min: string | null;
-    delivery_promise_max: string | null;
-    ready_pickup_promise_min: string | null;
-    ready_pickup_promise_max: string | null;
-}
-
 const newOrder = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const formData = req.body;
+        let order: Order = req.body;
 
-        const shippingMethodResponse = await axios.get(`https://yhua9e1l30.execute-api.us-east-1.amazonaws.com/sandbox/shipping-methods/${formData.shipping_method}`, {
+        const shippingMethodResponse = await axios.get(`https://yhua9e1l30.execute-api.us-east-1.amazonaws.com/sandbox/shipping-methods/${order.shipping_method}`, {
             headers: {
                 'x-api-key': process.env.X_API_KEY
             }
@@ -48,7 +24,8 @@ const newOrder = async (req: Request, res: Response, next: NextFunction) => {
         if (shippingMethodResponse.data) {
             const rules = shippingMethodResponse.data.rules;
 
-            const now = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(Date.now());
+            order.creation_date = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(Date.now());
+            order.internal_order_number = Date.now() + Math.floor(Math.random() * (100 - 0 + 1)) + 0;
 
             const offDaysResponse = await axios.get('https://yhua9e1l30.execute-api.us-east-1.amazonaws.com/sandbox/off-days', {
                 headers: {
@@ -58,29 +35,34 @@ const newOrder = async (req: Request, res: Response, next: NextFunction) => {
 
             const offDays = offDaysResponse.data;
 
-            let dayMS: number = 86400000;
+            const businessDays = nextBusinessDays.get(offDays);
 
-            const nextBusinessDays: string[] = [];
+            const { min, max } = rules.availability.byWeight;
 
-            while (nextBusinessDays.length < 10) {
-                const today = Date.now() + dayMS;
-                if (new Date(today).getDay() !== 6) {
-                    const day = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(today);
-                    if (!offDays.includes(day)) {
-                        nextBusinessDays.push(day);
-                    }
-                }
+            if (!weight.validate(min, max, order.line_items)) {
+                order = nullPromises.get(order);
+                const success = myCache.set(order.internal_order_number, order);
 
-                dayMS = dayMS + 86400000;
-            }
+                console.log(order.internal_order_number);
 
-            console.log(offDays);
+                if (success) return;
+            };
 
-            console.log('--', nextBusinessDays);
+            console.log('OK')
+
         }
     } catch (err) {
         console.log(err);
     }
 };
 
-export default { newOrder };
+const getOrder = async (req: Request, res: Response, next: NextFunction) => {
+    const id: number = Number(req.params.id);
+
+    const order = await myCache.get(id);
+
+    console.log(order);
+};
+
+
+export default { newOrder, getOrder };
