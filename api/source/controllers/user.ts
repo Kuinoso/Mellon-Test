@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import nextBusinessDays from '../helpers/nextBussinesDays';
 import weight from '../helpers/weight';
 import nullPromises from '../helpers/nullPromises';
+import today from '../helpers/today';
+import requestTime from '../helpers/requestTime';
 import Order from '../interfaces/Order';
 
 dotenv.config();
@@ -23,6 +25,8 @@ const newOrder = async (req: Request, res: Response, next: NextFunction) => {
 
         if (shippingMethodResponse.data) {
             const rules = shippingMethodResponse.data.rules;
+            const { min, max } = rules.availability.byWeight;
+            const { dayType, fromTimeOfDay, toTimeOfDay } = rules.availability.byRequestTime;
 
             order.creation_date = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(Date.now());
             order.internal_order_number = Date.now() + Math.floor(Math.random() * (100 - 0 + 1)) + 0;
@@ -34,22 +38,28 @@ const newOrder = async (req: Request, res: Response, next: NextFunction) => {
             });
 
             const offDays = offDaysResponse.data;
-
+            const todayBusinessDay = today.check(offDays);
             const businessDays = nextBusinessDays.get(offDays);
-
-            const { min, max } = rules.availability.byWeight;
 
             if (!weight.validate(min, max, order.line_items)) {
                 order = nullPromises.get(order);
-                const success = myCache.set(order.internal_order_number, order);
+                myCache.set(order.internal_order_number, order);
 
-                console.log(order.internal_order_number);
+                console.log('Rules not met');
 
-                if (success) return;
-            };
+                return;
+            }
 
-            console.log('OK')
+            if (!requestTime.validate(dayType, fromTimeOfDay, toTimeOfDay, todayBusinessDay)) {
+                order = nullPromises.get(order);
+                myCache.set(order.internal_order_number, order);
 
+                console.log('Rules not met');
+
+                return;
+            }
+
+            console.log(rules);
         }
     } catch (err) {
         console.log(err);
@@ -63,6 +73,5 @@ const getOrder = async (req: Request, res: Response, next: NextFunction) => {
 
     console.log(order);
 };
-
 
 export default { newOrder, getOrder };
