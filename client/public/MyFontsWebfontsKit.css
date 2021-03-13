@@ -1,0 +1,27 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 4026521, 2021-03-13T08:55:11-0500
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: Aceh-Light by 38-lineart
+ * URL: https://www.myfonts.com/fonts/38-lineart/aceh/light/
+ * Copyright: null
+ * 
+ * 
+ * 
+ * © 2021 MyFonts Inc
+*/
+
+
+
+  
+@font-face {
+  font-family: "Aceh-Light";
+  src: url('webFonts/AcehLight/font.woff2') format('woff2'), url('webFonts/AcehLight/font.woff') format('woff');
+}
+

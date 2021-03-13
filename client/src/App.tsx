@@ -1,10 +1,12 @@
 import React from 'react';
+import { HashRouter, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className="App">
-
-    </div>
+    <HashRouter basename='/' >
+      <Route path="/" render={() => <Navbar />} />
+    </HashRouter>
   );
 }
 
