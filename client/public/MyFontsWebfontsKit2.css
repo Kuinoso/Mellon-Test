@@ -1,0 +1,27 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 4026538, 2021-03-13T10:35:50-0500
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: Rothek-Bold by Groteskly Yours
+ * URL: https://www.myfonts.com/fonts/groteskly-yours/rothek/bold/
+ * Copyright: Copyright © 2019 by Eugene Tantsurin. All rights reserved.
+ * 
+ * 
+ * 
+ * © 2021 MyFonts Inc
+*/
+
+
+
+  
+@font-face {
+  font-family: "Rothek-Bold";
+  src: url('webFonts2/RothekBold/font.woff2') format('woff2'), url('webFonts2/RothekBold/font.woff') format('woff');
+}
+
