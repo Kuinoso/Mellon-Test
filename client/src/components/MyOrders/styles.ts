@@ -25,17 +25,11 @@ export const useStyles = makeStyles((theme) => ({
   },
   text: {
     width: "20%",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
     textAlign: 'left',
     padding: '0 10px',
   },
   text2: {
     width: "30%",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
     textAlign: 'left',
     padding: '0 10px',
     textTransform: 'capitalize',

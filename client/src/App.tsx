@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import CreateOrder from './components/CreateOrder';
 import MyOrders from './components/MyOrders';
+import Order from './components/Order';
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function App() {
       <Route exact path="/" render={() => <Home />} />
       <Route exact path="/createOrder" render={() => <CreateOrder />} />
       <Route exact path="/myOrders" render={() => <MyOrders />} />
+      <Route exact path="/order/:id" render={() => <Order />} />
     </HashRouter>
   );
 }

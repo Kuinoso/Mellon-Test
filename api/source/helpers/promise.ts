@@ -15,7 +15,7 @@ const setPromise = (businessDays: string[], type: string, order: any, orderPromi
     if (type === 'DELTA-HOURS') {
         const deltaHours: number = deltaH;
 
-        order[orderPromise] = hour + deltaHours;
+        order[orderPromise] = `${hour + deltaHours} hs`;
     } else if (type === 'DELTA-BUSINESSDAYS') {
         const deltaBusinessDays: number = deltaD;
         const timeOfDay: number = deltaTime;
