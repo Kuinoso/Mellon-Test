@@ -12,7 +12,7 @@
 * It uses TypeScript for the entire project.
 * Developed with React.js (hooks) and Redux on the front end.
 * It uses Node-Cache as the volatile temporal storage and node.js/express as the server.
-* Stylyzed with Material-UI.
+* Stylized with Material-UI.
 
 ## Installation
 
