@@ -30,7 +30,7 @@ $ cd Mellon-Test
 $ npm install
 # This will install dependencies to run the sever and client simultaneously.
 # 2nd.
-$ npm run install
+$ npm run fullInstall
 # This will install dependencies for both the client and the api.
 
 # Run the app
