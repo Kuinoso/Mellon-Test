@@ -6,7 +6,7 @@
   "scripts": {
     "installClient": "cd client && npm install",
     "installApi": "cd api && npm install",
-    "install": "npm install && npm run installApi && npm run installClient",
+    "fullInstall": "npm run installApi && npm run installClient",
     "client": "cd client && npm start",
     "api": "cd api && npm start",
     "dev": "concurrently -n 'server,client' -c 'green,cyan' \"npm run api\" \"npm run client\""
