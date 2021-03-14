@@ -26,6 +26,10 @@ $ git clone https://github.com/Kuinoso/Mellon-Test.git
 $ cd Mellon-Test
 
 # Install dependencies
+# 1st.
+$ npm install
+# This will install dependencies to run the sever and client simultaneously.
+# 2nd.
 $ npm run install
 # This will install dependencies for both the client and the api.
 
