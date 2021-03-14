@@ -6,6 +6,7 @@ import axios from 'axios';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import CreateOrder from './components/CreateOrder';
+import MyOrders from './components/MyOrders';
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
       <Route path="/" render={() => <Navbar />} />
       <Route exact path="/" render={() => <Home />} />
       <Route exact path="/createOrder" render={() => <CreateOrder />} />
+      <Route exact path="/myOrders" render={() => <MyOrders />} />
     </HashRouter>
   );
 }
