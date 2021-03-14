@@ -26,8 +26,8 @@ const validate = (casesList: any[], todayBusinessDay: boolean) => {
             selectedCase = found;
         } else {
             priority++;
-        };
-    };
+        }
+    }
 
     return selectedCase;
 };

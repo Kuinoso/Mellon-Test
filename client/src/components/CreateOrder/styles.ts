@@ -7,6 +7,10 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    [theme.breakpoints.down("xs")]: {
+      height: "min-content",
+      paddingBottom: 20,
+    },
   },
   form: {
     height: 580,
@@ -19,24 +23,38 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-around",
+    [theme.breakpoints.down("xs")]: {
+      width: 300,
+      height: "min-content",
+      padding: 10,
+    },
   },
   fields: {
     display: "flex",
     width: "80%",
     margin: "0 auto",
     justifyContent: "space-between",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column",
+    },
   },
   leftFields: {
     display: "flex",
     flexDirection: "column",
     width: "40%",
     alignItems: "left",
+    [theme.breakpoints.down("xs")]: {
+      width: "95%",
+    },
   },
   rightFields: {
     display: "flex",
     flexDirection: "column",
     width: "40%",
     alignItems: "left",
+    [theme.breakpoints.down("xs")]: {
+      width: "95%",
+    },
   },
   textField: {
     margin: "10px 0",
@@ -58,6 +76,9 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: "#6E60FF",
       color: "white",
     },
+    [theme.breakpoints.down("xs")]: {
+      marginTop: 20,
+    },
   },
   bigButton: {
     backgroundColor: "#46D999",
@@ -70,6 +91,9 @@ export const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#6E60FF",
       color: "white",
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "0.9rem",
     },
   },
   formControl: {

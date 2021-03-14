@@ -16,17 +16,16 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     margin: "0 40px",
-    [theme.breakpoints.down('xs')]: {
-        margin: 0,
-        marginTop: 40,
+    [theme.breakpoints.down("xs")]: {
+      margin: 0,
+      marginTop: 40,
     },
   },
   bottomImages: {
     display: "flex",
     marginTop: 15,
-    [theme.breakpoints.down('xs')]: {
-        marginTop: 5,
-
+    [theme.breakpoints.down("xs")]: {
+      marginTop: 5,
     },
   },
   imageBlock: {
@@ -35,23 +34,22 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    [theme.breakpoints.down('xs')]: {
-        margin: "0 30px",
-
+    [theme.breakpoints.down("xs")]: {
+      margin: "0 30px",
     },
   },
   image: {
     width: 150,
-    [theme.breakpoints.down('xs')]: {
-        width: 100,
+    [theme.breakpoints.down("xs")]: {
+      width: 100,
     },
   },
   imageText: {
     fontFamily: "Rothek-Bold",
     color: "#46D999",
     fontSize: "1.3rem",
-    [theme.breakpoints.down('xs')]: {
-        fontSize: '1rem',
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1rem",
     },
   },
   rightDiv: {
@@ -60,8 +58,8 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     margin: "0 40px",
-    [theme.breakpoints.down('xs')]: {
-        margin: 0,
+    [theme.breakpoints.down("xs")]: {
+      margin: 0,
     },
   },
   title: {
@@ -70,9 +68,9 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "3rem",
     width: 500,
     textAlign: "center",
-    [theme.breakpoints.down('xs')]: {
-        fontSize: '1.8rem',
-        width: 300,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.8rem",
+      width: 300,
     },
   },
   text: {
@@ -80,9 +78,9 @@ export const useStyles = makeStyles((theme) => ({
     width: 600,
     textAlign: "center",
     color: "#46D999",
-    [theme.breakpoints.down('xs')]: {
-        fontSize: '1.2rem',
-        width: 340,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.2rem",
+      width: 340,
     },
   },
 }));

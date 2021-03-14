@@ -84,14 +84,6 @@ const newOrder = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-// const getOrder = async (req: Request, res: Response, next: NextFunction) => {
-//     const id: string = req.params.id;
-
-//     const order = await myCache.get(id);
-
-//     res.send(order);
-// };
-
 const getAllOrders = async (req: Request, res: Response, next: NextFunction) => {
     const cacheOrders = Object.values(myCache.data);
     const allOrders: any[] = [];
@@ -111,8 +103,8 @@ const shippingMethods = async (req: Request, res: Response, next: NextFunction) 
         });
 
         if (shippingResponse.data) {
-            res.send(shippingResponse.data)
-        };
+            res.send(shippingResponse.data);
+        }
     } catch (err) {
         console.log(err);
     }

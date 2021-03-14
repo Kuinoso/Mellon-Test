@@ -7,6 +7,10 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    [theme.breakpoints.down("xs")]: {
+      height: "min-content",
+      paddingBottom: 20,
+    },
   },
   card: {
     backgroundColor: "#FBFAFC",
@@ -16,39 +20,57 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: "0px 0px 5px 0px rgba(138,138,138,1)",
     display: "flex",
     flexDirection: "column",
+    [theme.breakpoints.down("xs")]: {
+      width: 320,
+      height: "min-content",
+    },
   },
   details: {
-      display: 'flex',
-      justifyContent: 'space-around',
-      maxHeight: '50%',
-      overflowX: 'hidden',
-      overflow: 'scroll',
+    display: "flex",
+    justifyContent: "space-around",
+    maxHeight: "50%",
+    overflowX: "hidden",
+    overflow: "scroll",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column",
+      overflow: "visible",
+    },
   },
   detail: {
-      maxWidth: '33%',
+    maxWidth: "33%",
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: "95%",
+      padding: "0 20px",
+    },
   },
   list: {
-    display: 'flex',
-    flexDirection: 'column',
-    maxHeight: '50%',
-    overflowX: 'hidden',
-    overflow: 'scroll',
-    textAlign: 'center',
+    display: "flex",
+    flexDirection: "column",
+    maxHeight: "50%",
+    overflowX: "hidden",
+    overflow: "scroll",
+    textAlign: "center",
     paddingLeft: 12,
+    [theme.breakpoints.down("xs")]: {
+      maxHeight: 200,
+    },
   },
   listTitle: {
-      fontSize: '1.3rem',
+    fontSize: "1.3rem",
+    [theme.breakpoints.down("xs")]: {
+      textAlign: "center",
+    },
   },
   line: {
-      maxWidth: '100%',
+    maxWidth: "100%",
   },
   item: {
     display: "flex",
     borderBottom: "0.5px solid #d4d4d4",
-    cursor: 'auto',
+    cursor: "auto",
   },
   text: {
-      textAlign: 'center',
-      width: '33%',
+    textAlign: "center",
+    width: "33%",
   },
 }));

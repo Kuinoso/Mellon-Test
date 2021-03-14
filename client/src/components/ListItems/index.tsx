@@ -83,7 +83,7 @@ export default function ListItems({ handleClose, getLineItems, listItems }: List
 
     return (
         <div className={classes.container}>
-            <CancelIcon className={classes.cancel} onClick={() => handleClose()}/>
+            <CancelIcon className={classes.cancel} onClick={() => handleClose()} />
             <h1 className={classes.title}>Add line items</h1>
             <div className={classes.body}>
                 <div className={classes.fields}>
@@ -111,7 +111,7 @@ export default function ListItems({ handleClose, getLineItems, listItems }: List
                     )}
                 </div>
             </div>
-            <Button onClick={() => {getLineItems(lineItems); handleClose()}} className={classes.bigButton} disabled={!validateList()} >
+            <Button onClick={() => { getLineItems(lineItems); handleClose() }} className={classes.bigButton} disabled={!validateList()} >
                 Save items
             </Button>
         </div>

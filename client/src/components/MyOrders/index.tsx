@@ -41,10 +41,10 @@ export default function MyOrders() {
                 <List component="nav" aria-label="secondary mailbox folders" className={classes.list}>
                     {allOrders.map((item: CompleteOrder) =>
                         <ListItem button className={classes.item} onClick={() => goToOrder(item)}>
-                            <ListItemText primary={`#${item.external_order_number}`} className={classes.text} />
-                            <ListItemText primary={item.seller_store} className={classes.text2} />
-                            <ListItemText primary={item.creation_date} className={classes.text} />
-                            <ListItemText primary={item.shipping_method.name} className={classes.text2} />
+                            <p className={classes.text}>#{item.external_order_number}</p>
+                            <p className={classes.text2}>{item.seller_store}</p>
+                            <p className={classes.text}>{item.creation_date}</p>
+                            <p className={classes.text2}>{item.shipping_method.name}</p>
                         </ListItem>
                     )}
                 </List>

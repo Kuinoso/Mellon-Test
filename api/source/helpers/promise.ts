@@ -10,7 +10,7 @@ const setPromise = (businessDays: string[], type: string, order: any, orderPromi
     } else if (gmt > 0) {
         deltaH = deltaH - Number(gmt.toString().split('+')[1]);
         deltaTime = deltaTime - Number(gmt.toString().split('+')[1]);
-    };
+    }
 
     if (type === 'DELTA-HOURS') {
         const deltaHours: number = deltaH;

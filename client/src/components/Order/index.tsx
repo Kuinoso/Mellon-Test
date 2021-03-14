@@ -62,9 +62,9 @@ export default function Order() {
                         <h4 className={classes.listTitle}>Line Items</h4>
                         {order.line_items.map((item: Product) =>
                             <ListItem button className={classes.item}>
-                                <ListItemText primary={item.name} className={classes.text}/>
-                                <ListItemText primary={item.qty > 1 ? `${item.qty} units` : `${item.qty} unit`} className={classes.text}/>
-                                <ListItemText primary={`${item.weight} kg`} className={classes.text}/>
+                                <ListItemText primary={item.name} className={classes.text} />
+                                <ListItemText primary={item.qty > 1 ? `${item.qty} units` : `${item.qty} unit`} className={classes.text} />
+                                <ListItemText primary={`${item.weight} kg`} className={classes.text} />
                             </ListItem>
                         )}
                     </List>
