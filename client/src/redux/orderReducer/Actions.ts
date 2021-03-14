@@ -1,7 +1,8 @@
 import * as actions from './Constants';
 
-export const getCharacterInfo = () => async (dispatch: (arg0: { type: string; }) => void) => {
+export const getShippingMethods = (props: []) => async (dispatch: (arg0: { type: string; payload: []}) => void) => {
     dispatch({
-        type: actions.GET_CHARACTER_INFO,
+        type: actions.GET_SHIPPING_METHODS,
+        payload: props
     });
 };

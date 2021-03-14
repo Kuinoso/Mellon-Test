@@ -5,8 +5,10 @@ const router = express.Router();
 
 router.post('/newOrder', controller.newOrder);
 
-router.get('/getOrder/:id', controller.getOrder);
+// router.get('/getOrder/:id', controller.getOrder);
 
 router.get('/getAllOrders', controller.getAllOrders);
+
+router.get('/shippingMethods', controller.shippingMethods);
 
 export = router;

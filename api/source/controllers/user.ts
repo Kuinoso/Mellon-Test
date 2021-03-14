@@ -18,7 +18,7 @@ const newOrder = async (req: Request, res: Response, next: NextFunction) => {
     try {
         let order = req.body;
 
-        const shippingMethodResponse = await axios.get(`https://yhua9e1l30.execute-api.us-east-1.amazonaws.com/sandbox/shipping-methods/${order.shipping_method}`, {
+        const shippingMethodResponse = await axios.get(`https://yhua9e1l30.execute-api.us-east-1.amazonaws.com/sandbox/shipping-methods/${order.shipping_method.id}`, {
             headers: {
                 'x-api-key': process.env.X_API_KEY
             }
@@ -84,22 +84,38 @@ const newOrder = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-const getOrder = async (req: Request, res: Response, next: NextFunction) => {
-    const id: string = req.params.id;
+// const getOrder = async (req: Request, res: Response, next: NextFunction) => {
+//     const id: string = req.params.id;
 
-    const order = await myCache.get(id);
+//     const order = await myCache.get(id);
 
-    res.send(order);
-};
+//     res.send(order);
+// };
 
 const getAllOrders = async (req: Request, res: Response, next: NextFunction) => {
     const cacheOrders = Object.values(myCache.data);
     const allOrders: any[] = [];
 
-    cacheOrders.forEach(order => {
+    cacheOrders.forEach((order) => {
         allOrders.push(order.v);
     });
     res.send(allOrders);
 };
 
-export default { newOrder, getOrder, getAllOrders };
+const shippingMethods = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const shippingResponse = await axios.get('https://yhua9e1l30.execute-api.us-east-1.amazonaws.com/sandbox/shipping-methods', {
+            headers: {
+                'x-api-key': process.env.X_API_KEY
+            }
+        });
+
+        if (shippingResponse.data) {
+            res.send(shippingResponse.data)
+        };
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export default { newOrder, getAllOrders, shippingMethods };

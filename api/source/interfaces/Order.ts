@@ -1,9 +1,14 @@
 import Product from './Product';
 
+interface Shipping_Method {
+    id: number;
+    name: string;
+}
+
 interface Order {
     seller_store: string;
-    shipping_method: number;
-    external_order_number: number;
+    shipping_method: Shipping_Method;
+    external_order_number: string;
     buyer_full_name: string;
     buyer_phone_number: string;
     buyer_email: string;

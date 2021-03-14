@@ -1,1 +1,1 @@
-export const GET_CHARACTER_INFO: string = 'GET_CHARACTER_INFO';
+export const GET_SHIPPING_METHODS: string = 'GET_SHIPPING_METHODS';
